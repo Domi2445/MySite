@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Menu -->
+
+    <nav>
+  <div class="nav-header">
+    <button class="burger" id="burger-toggle">&#9776;</button>
+  </div>
+  <ul class="nav-menu" id="nav-menu">
+    <li><a href="#section1">Über mich</a></li>
+    <li><a href="#section2">Programmiersprachen</a></li>
+    <li><a href="#section3">Projekte</a></li>
+    <li><a href="#section4">Kontakt</a></li>
+    <li><a href="#Datenschutz">Datenschutz</a></li>
+    <li><a href="impressum.html">Impressum</a></li>
+  </ul>
+</nav>
+
+
+
+
+<section id="section1" class="card">
+    <h2>Über mich</h2>
+    <p>Hier ist ein bisschen Information über mich.</p>
+    <p>ich bin eine Entwickler mit der Leidenschaft für alltagslösungen. Vor allem im Bereich von E-Commerce-Lösungen.</p>
+    <p>Ich habe Erfahrung in verschiedenen Programmiersprachen und Technologien, die mir helfen, innovative Lösungen zu entwickeln.</p>
+    <p>Ich arbeite gerne im Team und schätze den Austausch von Ideen und Erfahrungen.</p>
+    
+
+</section>
+
+<section id="section2" class="card">
+    <h2>Programmiersprachen</h2>
+    <div class="grid">
+    <div class="grid-item">
+        <img src="Bilder/Html.png" alt="Html" style="width:50px;height:50px;" class="zoomable">
+        <span>HTML</span>
+    </div>
+    <div class="grid-item">
+        <img src="Bilder/Css.png" alt="Css" style="width:50px;height:50px;" class="zoomable">
+        <span>CSS</span>
+    </div>
+    <div class="grid-item">
+        <img src="Bilder/javascript.png" alt="JavaScript" style="width:50px;height:50px;" class="zoomable">
+        <span>JavaScript</span>
+    </div>
+    <div class="grid-item">
+        <img src="Bilder/java.png" alt="Java" style="width:50px;height:50px;" class="zoomable">
+        <span>Java</span>
+    </div>
+    <div class="grid-item">
+        <img src="https://cdn-icons-png.flaticon.com/128/6132/6132221.png" alt="C#" style="width:50px;height:50px;" class="zoomable">
+        <span>C#</span>
+    </div>
+</div>
+
+</section>
+<section id="section3" class="card">
+    <h2>Projekte</h2>
+    <p>Hier sind einige meiner Projekte:</p>
+    <ul>
+        <li>Projekt 1: Einfaches Bestellsystem auf C Basis.</li>
+        <li>Projekt 2: Eine Responsive Restaurant Webseite mit HTML, CSS und JavaScript.</li>
+        <!-- <li>Projekt 3: Beschreibung des Projekts 3.</li> -->
+    </ul>
+</section>
+<section id="section4" class="card">
+    <h2>Kontakt</h2>
+    <form action="submit_form.php" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Nachricht:</label>
+        <textarea id="message" name="message" required></textarea>
+        <input type="submit" value="Senden">
+    </form>
+</section>
+
+<section id="social" class="card">
+  <h2>Social Media</h2>
+  <p>Du findest mich auch hier:</p>
+  <div class="social-links">
+    <a href="mailto:deine@email.de" title="Email">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+    </a>
+    <a href="https://github.com/deinprofil" target="_blank" title="GitHub">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
+    </a>
+    <a href="https://linkedin.com/in/deinprofil" target="_blank" title="LinkedIn">
+      <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn">
+    </a>
+    <a href="https://instagram.com/deinprofil" target="_blank" title="Instagram">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    </a>
+  </div>
+</section>
+
+
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2024 Dominik A. – Entwickler für E-Commerce & Automatisierung</p>
+    <div class="social-icons">
+      <a href="mailto:deine@email.de" title="Email">
+        <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+      </a>
+      <a href="https://github.com/deinprofil" target="_blank" title="GitHub">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub">
+      </a>
+      <a href="https://linkedin.com/in/deinprofil" target="_blank" title="LinkedIn">
+        <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn">
+      </a>
+      <a href="https://instagram.com/deinprofil" target="_blank" title="Instagram">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      </a>
+    </div>
+    <p><a href="#Datenschutz">Datenschutz</a> | <a href="impressum.html">Impressum</a></p>
+  </div>
+</footer>
+
+
+
+<div id="overlay" onclick="this.style.display='none'">
+    <img id="overlay-img" src="" alt="Zoomed Image">
+</div>
+
+<script>
+    document.querySelectorAll('.zoomable').forEach(img => {
+        img.addEventListener('click', () => {
+            document.getElementById('overlay-img').src = img.src;
+            document.getElementById('overlay').style.display = 'flex';
+        });
+    });
+
+    const burger = document.getElementById('burger-toggle');
+  const navMenu = document.getElementById('nav-menu');
+
+  burger.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+  });
+</script>
+
+</body>
+</html>
