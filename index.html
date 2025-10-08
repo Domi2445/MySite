@@ -94,8 +94,15 @@
 
   <div id="success-message">✅ Nachricht erfolgreich gesendet. Danke!</div>
 </section>
+<div id="popup-success">
+  ✅ Nachricht erfolgreich gesendet!
+</div>
 
-<div id="loading-overlay">⏳ Nachricht wird gesendet...</div>
+<div id="loading-overlay">
+  <div class="spinner"></div>
+  <p>Nachricht wird gesendet...</p>
+</div>
+
 
 
 
@@ -149,48 +156,63 @@
 </div>
 
 <script>
-    document.querySelectorAll('.zoomable').forEach(img => {
-        img.addEventListener('click', () => {
-            document.getElementById('overlay-img').src = img.src;
-            document.getElementById('overlay').style.display = 'flex';
-        });
-    });
-
-    const burger = document.getElementById('burger-toggle');
-  const navMenu = document.getElementById('nav-menu');
-
-  burger.addEventListener('click', () => {
-    navMenu.classList.toggle('show');
+   // Zoom-Funktion für Bilder
+document.querySelectorAll('.zoomable').forEach(img => {
+  img.addEventListener('click', () => {
+    document.getElementById('overlay-img').src = img.src;
+    document.getElementById('overlay').style.display = 'flex';
   });
-  grecaptcha.ready(function() 
-  {
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
+});
 
-      // Ladeanzeige aktivieren
-      document.getElementById('loading-overlay').style.display = 'block';
+// Burger-Menü Toggle
+const burger = document.getElementById('burger-toggle');
+const navMenu = document.getElementById('nav-menu');
 
-      grecaptcha.execute('6LeUKuMrAAAAAOkrmkp4QlbapyDRD3pxgeGzgt3O', {action: 'submit'}).then(function(token) {
-        document.getElementById('g-recaptcha-response').value = token;
+burger.addEventListener('click', () => {
+  navMenu.classList.toggle('show');
+});
 
-        // Formulardaten senden
-        fetch('https://formspree.io/f/mdkwlbov', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(new FormData(document.getElementById('contact-form')))
-        })
-        .then(response => {
-          document.getElementById('loading-overlay').style.display = 'none';
-          if (response.ok) {
-            document.getElementById('contact-form').reset();
-            document.getElementById('success-message').style.display = 'block';
-          } else {
-            alert('❌ Fehler beim Senden. Bitte versuche es später erneut.');
-          }
-        });
+// Formular mit reCAPTCHA + Ladeanzeige + Erfolgspopup
+grecaptcha.ready(function() {
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Ladeoverlay anzeigen
+    const overlay = document.getElementById('loading-overlay');
+    overlay.style.display = 'block';
+
+    grecaptcha.execute('6LeUKuMrAAAAAOkrmkp4QlbapyDRD3pxgeGzgt3O', {action: 'submit'}).then(function(token) {
+      document.getElementById('g-recaptcha-response').value = token;
+
+      // Formulardaten senden
+      fetch('https://formspree.io/f/mdkwlbov', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(document.getElementById('contact-form')))
+      })
+      .then(response => {
+        overlay.style.display = 'none';
+
+        if (response.ok) {
+          // Formular zurücksetzen
+          document.getElementById('contact-form').reset();
+
+          // Erfolgspopup anzeigen
+          const popup = document.getElementById('popup-success');
+          popup.style.display = 'block';
+
+          // Nach 4 Sekunden ausblenden
+          setTimeout(() => {
+            popup.style.display = 'none';
+          }, 4000);
+        } else {
+          alert('❌ Fehler beim Senden. Bitte versuche es später erneut.');
+        }
       });
     });
   });
+});
+
 </script>
 
 </body>
